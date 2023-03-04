@@ -69,8 +69,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-### For Login Error Messages refer "https://firebase.google.com/docs/auth/admin/errors"
-
-### `Current Firebase Project name is` Firebase-Auth-Log-In-Out
-
-All the data and users are stored
+For Login Error Messages refer "https://firebase.google.com/docs/auth/admin/errors"
+Current Firebase Project name is Firebase-Auth-Log-In-Out
