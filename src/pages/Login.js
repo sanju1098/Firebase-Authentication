@@ -8,9 +8,15 @@ import {
 	Grid,
 	Link as LinkUI,
 } from "@mui/material";
+import GoogleIcon from "@mui/icons-material/Google";
 
 import { Link, useNavigate } from "react-router-dom";
-import { auth, logInWithEmailAndPassword } from "../firebase/index";
+
+import {
+	auth,
+	logInWithEmailAndPassword,
+	signInWithGoogle,
+} from "../firebase/index";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { authErrorMessage } from "../helpers";
 // import { signInWithEmailAndPassword } from "firebase/auth";
@@ -38,10 +44,7 @@ const Login = () => {
 				let showErrorMsg = authErrorMessage(errCodeMes[0]);
 				setError(showErrorMsg);
 			})
-			.catch((breaked) => {
-				console.log("Something went Wrong. Please refresh😐");
-			});
-		console.log(result);
+			.catch((breaked) => {});
 	};
 
 	// const onHandleLogin = (e) => {
@@ -129,6 +132,16 @@ const Login = () => {
 							onClick={handleSubmit}
 						>
 							Sign In
+						</Button>
+
+						<Button
+							color="secondary"
+							fullWidth
+							variant="contained"
+							startIcon={<GoogleIcon />}
+							onClick={signInWithGoogle}
+						>
+							Login with Google Account
 						</Button>
 
 						<Grid container justifyContent="flex-end">

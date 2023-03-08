@@ -28,7 +28,6 @@ const ResetPassword = () => {
 	const handleResetPassword = () => {
 		const result = sendPasswordReset(email)
 			.then((errCodeMes) => {
-				console.log(errCodeMes);
 				if (errCodeMes === email) {
 					setError("Reset Password Link sent to email");
 				} else {
@@ -36,10 +35,7 @@ const ResetPassword = () => {
 					setError(showErrorMsg);
 				}
 			})
-			.catch((breaked) => {
-				console.log("Something went Wrong. Please refresh😐");
-			});
-		console.log(result);
+			.catch((breaked) => {});
 	};
 
 	return (
@@ -58,7 +54,7 @@ const ResetPassword = () => {
 					<Grid container spacing={2}>
 						<Grid item xs={12}>
 							{error === "Reset Password Link sent to email" ? (
-								<Typography color="red" align="center">
+								<Typography color="green" align="center">
 									{error}
 								</Typography>
 							) : (

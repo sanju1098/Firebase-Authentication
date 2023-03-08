@@ -8,8 +8,13 @@ import {
 	Grid,
 	Link as LinkUI,
 } from "@mui/material";
+import GoogleIcon from "@mui/icons-material/Google";
 
-import { auth, registerWithEmailAndPassword } from "../firebase/index";
+import {
+	auth,
+	registerWithEmailAndPassword,
+	signInWithGoogle,
+} from "../firebase/index";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { authErrorMessage } from "../helpers";
@@ -39,14 +44,10 @@ const Register = () => {
 				formvalues.password
 			)
 				.then((errCodeMes) => {
-					console.log(errCodeMes);
 					let showErrorMsg = authErrorMessage(errCodeMes[0]);
 					setError(showErrorMsg);
 				})
-				.catch((breaked) => {
-					console.log("Something went Wrong. Please refresh😐");
-				});
-			console.log(result);
+				.catch((breaked) => {});
 		}
 	};
 
@@ -120,6 +121,16 @@ const Register = () => {
 							onClick={handleRegister}
 						>
 							Sign Up
+						</Button>
+
+						<Button
+							color="secondary"
+							fullWidth
+							variant="contained"
+							startIcon={<GoogleIcon />}
+							onClick={signInWithGoogle}
+						>
+							Sign Up with Google Account
 						</Button>
 
 						<Grid container justifyContent="flex-end">

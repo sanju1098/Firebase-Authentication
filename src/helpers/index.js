@@ -18,6 +18,9 @@ export function authErrorMessage(error) {
 	if (error === "auth/missing-email") return "Enter the Email";
 	if (error === "auth/email-already-in-use") return "Email is already in use";
 	if (error === "auth/invalid-password") return "Password is Invalid";
+	if (error === "auth/wrong-password") return "Password is Wrong";
+	if (error === "auth/too-many-requests")
+		return "Access to this account has been temporarily disabled due to many failed login attempts. You can try again later";
 	if (error === "auth/invalid-phone-number") return "Phone Number is Invalid";
 	if (error === "auth/invalid-uid") return "Provided UID is Invalid";
 	if (error === "auth/missing-uid") return "UID is missing";
@@ -31,6 +34,7 @@ export function authErrorMessage(error) {
 	if (error === "auth/uid-already-exists")
 		return "UID is already in use by an existing user";
 	if (error === "auth/user-not-found") return "User not Found";
+	if (error === "(auth/operation-not-allowed).") return "Cannot be performed";
 
 	return error;
 }
