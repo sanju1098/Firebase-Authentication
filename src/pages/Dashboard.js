@@ -9,6 +9,10 @@ import {
 } from "@mui/material";
 import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
 import LogoutIcon from "@mui/icons-material/Logout";
+import MarkEmailReadIcon from "@mui/icons-material/MarkEmailRead";
+import GoogleIcon from "@mui/icons-material/Google";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 import { useNavigate } from "react-router-dom";
 
@@ -22,6 +26,7 @@ const Dashboard = () => {
 
 	const [name, setName] = useState("");
 	const [userInfo, setUserInfo] = useState([]);
+	const [showUid, setShowUID] = useState(false);
 
 	const navigate = useNavigate();
 
@@ -65,12 +70,24 @@ const Dashboard = () => {
 					<Box>
 						<Card variant="outlined">
 							<CardContent>
-								<CheckCircleOutlineRoundedIcon
-									fontSize="large"
-									color="success"
-								/>
 								{userInfo.email ? (
 									<>
+										<div
+											style={{
+												display: "flex",
+												justifyContent: "space-between",
+											}}
+										>
+											<CheckCircleOutlineRoundedIcon
+												fontSize="large"
+												color="success"
+											/>
+											{userInfo.authProvider === "google" ? (
+												<GoogleIcon fontSize="large" color="success" />
+											) : (
+												<MarkEmailReadIcon fontSize="large" color="success" />
+											)}
+										</div>
 										<Typography
 											sx={{ fontSize: 18 }}
 											color="text.secondary"
@@ -78,26 +95,43 @@ const Dashboard = () => {
 										>
 											Successfully Logged-In 😍🤩:
 										</Typography>
-										<Typography sx={{ fontFamily: "Georgia" }} variant="h3">
+										<Typography sx={{ fontFamily: "Georgia" }} variant="h4">
 											{name.toUpperCase()}
 										</Typography>
 										<Typography sx={{ fontFamily: "Georgia" }} variant="h5">
 											Email: {userInfo.email}
 										</Typography>
 										<Typography sx={{ fontFamily: "Georgia" }} variant="h6">
-											UID: {userInfo.uid}
+											UID:{" "}
+											{showUid ? (
+												<>
+													<VisibilityOffIcon
+														sx={{ color: "grey" }}
+														onClick={() => setShowUID(!showUid)}
+													/>{" "}
+													{userInfo.uid}
+												</>
+											) : (
+												<>
+													<VisibilityIcon
+														sx={{ color: "grey" }}
+														onClick={() => setShowUID(!showUid)}
+													/>{" "}
+													...................................
+												</>
+											)}
 										</Typography>
 									</>
 								) : (
 									<Typography sx={{ fontFamily: "Georgia" }} variant="h3">
-										Fetching Your Details...
+										Loading Details...
 									</Typography>
 								)}
 							</CardContent>
 						</Card>
 
 						<Button
-							// disabled
+							disabled={!userInfo.email}
 							fullWidth
 							variant="contained"
 							sx={{ mt: 1 }}
