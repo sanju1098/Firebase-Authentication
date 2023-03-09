@@ -9,6 +9,7 @@ import {
 	Link as LinkUI,
 } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import {
 	auth,
@@ -29,6 +30,7 @@ const Register = () => {
 		password: "",
 	});
 	const [error, setError] = useState("");
+	const [load, setLoad] = useState(false);
 
 	const handleOnChange = (e) => {
 		setFormvalues({ ...formvalues, [e.target.name]: e.target.value });
@@ -38,6 +40,7 @@ const Register = () => {
 		if (formvalues.name.length < 1) {
 			setError("Enter the Name");
 		} else {
+			setLoad(true);
 			const result = registerWithEmailAndPassword(
 				formvalues.name,
 				formvalues.email,
@@ -45,9 +48,12 @@ const Register = () => {
 			)
 				.then((errCodeMes) => {
 					let showErrorMsg = authErrorMessage(errCodeMes[0]);
+					setLoad(false);
 					setError(showErrorMsg);
 				})
-				.catch((breaked) => {});
+				.catch((success) => {
+					setLoad(false);
+				});
 		}
 	};
 
@@ -115,16 +121,23 @@ const Register = () => {
 
 						<Button
 							fullWidth
-							color="warning"
 							variant="contained"
 							sx={{ mt: 3, mb: 2 }}
 							onClick={handleRegister}
 						>
-							Sign Up
+							{load ? (
+								<CircularProgress
+									thickness="5"
+									sx={{ color: "white" }}
+									size="1.5rem"
+								/>
+							) : (
+								"Sign Up"
+							)}
 						</Button>
 
 						<Button
-							color="secondary"
+							color="warning"
 							fullWidth
 							variant="contained"
 							startIcon={<GoogleIcon />}

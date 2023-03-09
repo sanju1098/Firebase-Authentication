@@ -33,7 +33,7 @@ const Dashboard = () => {
 			setUserInfo(data);
 			setName(data.name);
 		} catch (err) {
-			console.error(err);
+			// console.error(err);
 		}
 	};
 
@@ -49,7 +49,7 @@ const Dashboard = () => {
 				navigate("/");
 			})
 			.catch((error) => {
-				console.log(error);
+				// console.log(error);
 			});
 	};
 
@@ -78,11 +78,14 @@ const Dashboard = () => {
 										>
 											Successfully Logged-In 😍🤩:
 										</Typography>
-										<Typography sx={{ fontFamily: "Georgia" }} variant="h5">
-											{name}
+										<Typography sx={{ fontFamily: "Georgia" }} variant="h3">
+											{name.toUpperCase()}
 										</Typography>
 										<Typography sx={{ fontFamily: "Georgia" }} variant="h5">
-											{userInfo.email}
+											Email: {userInfo.email}
+										</Typography>
+										<Typography sx={{ fontFamily: "Georgia" }} variant="h6">
+											UID: {userInfo.uid}
 										</Typography>
 									</>
 								) : (

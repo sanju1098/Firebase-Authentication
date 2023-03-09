@@ -9,6 +9,7 @@ import {
 	Link as LinkUI,
 } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import { Link, useNavigate } from "react-router-dom";
 
@@ -30,21 +31,26 @@ const Login = () => {
 		password: "",
 	});
 	const [error, setError] = useState("");
+	const [load, setLoad] = useState(false);
 
 	const handleOnChange = (e) => {
 		setFormvalues({ ...formvalues, [e.target.name]: e.target.value });
 	};
 
 	const handleSubmit = () => {
+		setLoad(true);
 		const result = logInWithEmailAndPassword(
 			formvalues.email,
 			formvalues.password
 		)
 			.then((errCodeMes) => {
 				let showErrorMsg = authErrorMessage(errCodeMes[0]);
+				setLoad(false);
 				setError(showErrorMsg);
 			})
-			.catch((breaked) => {});
+			.catch((success) => {
+				setLoad(false);
+			});
 	};
 
 	// const onHandleLogin = (e) => {
@@ -131,11 +137,19 @@ const Login = () => {
 							sx={{ mt: 3, mb: 2 }}
 							onClick={handleSubmit}
 						>
-							Sign In
+							{load ? (
+								<CircularProgress
+									thickness="5"
+									sx={{ color: "white" }}
+									size="1.5rem"
+								/>
+							) : (
+								"Sign In"
+							)}
 						</Button>
 
 						<Button
-							color="secondary"
+							color="warning"
 							fullWidth
 							variant="contained"
 							startIcon={<GoogleIcon />}
